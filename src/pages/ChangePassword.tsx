@@ -1,7 +1,32 @@
 import React from 'react'
 import Link from 'next/link';
+import { useRouter} from 'next/router';
+import { Formik, Field, Form, ErrorMessage} from 'formik';
+import * as Yup from 'yup';
 
 const ChangePassword = () => {
+
+  let router = useRouter();
+
+  let initialValues = {
+    currentPassword: '', 
+    newPassword: '',     
+    confirmNewPassword: ''
+  };
+  
+  let validationSchema=Yup.object({
+    currentPassword: Yup.string().required('Current Password is required'),
+    newPassword: Yup.string().required('New Password is required'),
+    confirmNewPassword: Yup.string()
+      // .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
+      .required('Confirm New Password is required'),
+  })
+  
+  let onSubmit=(values: typeof initialValues)=>{
+   console.log('form data',values)
+   router.push('/');
+  }
+
   return (
     <div>
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -11,51 +36,64 @@ const ChangePassword = () => {
             Change Your Password
           </h2>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="currentPassword" className="sr-only">
-                Current Password
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
+          >
+        <Form className="mt-8 space-y-6" action="#" method="POST">
+          
+           <div>
+              <label htmlFor="currentPassword" className="block text-sm font-medium leading-6 text-gray-900">
+              Current Password
               </label>
-              <input
-                id="currentPassword"
-                name="currentPassword"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Current Password"
-              />
+              <div className="mt-2">
+                <Field
+                  id="currentPassword"
+                  name="currentPassword"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="Current Password"
+                />
+                <ErrorMessage name='currentPassword'/>
+              </div>
             </div>
             <div>
-              <label htmlFor="newPassword" className="sr-only">
-                New Password
+              <label htmlFor="newPassword" className="block text-sm font-medium leading-6 text-gray-900">
+              New Password
               </label>
-              <input
-                id="newPassword"
-                name="newPassword"
-                type="password"
-                autoComplete="new-password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="New Password"
-              />
+              <div className="mt-2">
+                <Field
+                  id="newPassword"
+                  name="newPassword"
+                  type="password"
+                  autoComplete="new-password"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="New Password"
+                />
+                <ErrorMessage name='newPassword'/>
+              </div>
             </div>
             <div>
-              <label htmlFor="confirmNewPassword" className="sr-only">
-                Confirm New Password
+              <label htmlFor="confirmNewPassword" className="block text-sm font-medium leading-6 text-gray-900">
+              Confirm New Password
               </label>
-              <input
-                id="confirmNewPassword"
-                name="confirmNewPassword"
-                type="password"
-                autoComplete="new-password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Confirm New Password"
-              />
+              <div className="mt-2">
+                <Field
+                  id="confirmNewPassword"
+                  name="confirmNewPassword"
+                  type="password"
+                  autoComplete="new-password"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="Confirm New Password"
+                />
+                <ErrorMessage name='confirmNewPassword'/>
+              </div>
             </div>
-          </div>
 
           <div>
             <button
@@ -65,7 +103,8 @@ const ChangePassword = () => {
               Change Password
             </button>
           </div>
-        </form>
+        </Form>
+        </Formik>
         <div className="text-sm text-center">
           <p className="text-gray-600">
             Remember your password?{' '}

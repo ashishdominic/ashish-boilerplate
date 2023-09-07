@@ -1,7 +1,26 @@
 import React from 'react'
 import Link from 'next/link';
+import { useRouter} from 'next/router';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 const ForgotPassword = () => {
+  let router = useRouter();
+
+  let initialValues = {
+    email: '',
+  };
+  
+  let validationSchema=Yup.object({
+    email: Yup.string().email('Invalid email address').required('Email is required'),
+   
+  })
+  
+  let onSubmit=(values: { email: string})=>{
+   console.log('form data',values)
+   router.push('/');
+  }
+
   return (
     <div>
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -14,23 +33,30 @@ const ForgotPassword = () => {
             Enter your email address, and we'll send you a link to reset your password.
           </p>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="email" className="sr-only">
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
+          >
+        <Form className="mt-8 space-y-6" action="#" method="POST">
+         
+           <div>
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
               </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
-              />
+              <div className="mt-2">
+                <Field
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="Email address"
+                />
+                <ErrorMessage name='email'/>
+              </div>
             </div>
-          </div>
 
           <div>
             <button
@@ -40,7 +66,8 @@ const ForgotPassword = () => {
               Reset Password
             </button>
           </div>
-        </form>
+        </Form>
+        </Formik>
         <div className="text-sm text-center">
           <p className="text-gray-600">
             Remember your password?{' '}
