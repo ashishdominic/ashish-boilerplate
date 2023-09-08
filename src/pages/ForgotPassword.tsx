@@ -1,8 +1,10 @@
 import React from 'react'
 import Link from 'next/link';
 import { useRouter} from 'next/router';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import CustomTextField from '../components/CustomTextField';
+
 
 const ForgotPassword = () => {
   let router = useRouter();
@@ -46,15 +48,13 @@ const ForgotPassword = () => {
               </label>
               <div className="mt-2">
                 <Field
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="Email address"
+                   name="email"
+                   label="Email"
+                   variant="outlined" 
+                   fullWidth
+                   as={CustomTextField}  
                 />
-                <ErrorMessage name='email'/>
+                
               </div>
             </div>
 

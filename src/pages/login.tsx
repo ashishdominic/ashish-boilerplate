@@ -2,8 +2,10 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter} from 'next/router';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form} from 'formik';
 import * as Yup from 'yup';
+import CustomTextField from '../components/CustomTextField';
+import CustomSubmitButton from '../components/CustomSubmitButton'
 
 
 
@@ -17,7 +19,12 @@ let router = useRouter();
   
   let validationSchema=Yup.object({
     email: Yup.string().email('Invalid email address').required('Email is required'),
-    password: Yup.string().required('Password is required'),
+    password: Yup.string().required('Password is required').test('is-strong-password', 'Password must be strong', (value) => {
+
+      const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+      return strongPasswordRegex.test(value || '')
+    }),
   })
   
   let onSubmit=(values: { email: string; password: string})=>{
@@ -45,58 +52,63 @@ let router = useRouter();
             validationSchema={validationSchema}
             onSubmit={onSubmit}
           >
-          <Form className="space-y-6" action="#" method="POST">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                Email address
-              </label>
-              <div className="mt-2">
+          <Form className="rounded bg-white p-6 shadow-md space-y-6" action="#" method="POST">
+            
                 <Field
-                  id="email"
                   name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  label="Email"
+                  variant="outlined" 
+                  fullWidth
+                  as={CustomTextField}
                 />
-                <ErrorMessage name='email'/>
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                  Password
-                </label>
+                <Field
+                  name="password"
+                  label="Password"
+                  // type="password"
+                  variant="outlined" 
+                  fullWidth
+                  as={CustomTextField}
+                />
+              
+            
+              <div className="flex items-center justify-end">
                 <div className="text-sm">
-                 <Link href="/ForgotPassword"  className="font-semibold text-indigo-600 hover:text-indigo-500"
-                    >
-                
-                Forgot password?
+                 <Link href="/ForgotPassword"  className="font-semibold text-indigo-600 hover:text-indigo-500" >
+                    Forgot password?
                  </Link>
                  
                 </div>
               </div>
-              <div className="mt-2">
-                <Field
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-                <ErrorMessage name='password'/>
-              </div>
-            </div>
-
+              
             <div>
-              <button
+              {/* <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                 label="Submit Form"
+                 variant="contained"
+                //className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                component={CustomSubmitButton}
               >
                 Sign in
-              </button>
+              </button> */}
+
+
+              {/* <Button
+               type="submit" 
+               label="Sign in"
+               variant="contained"
+               as={CustomSubmitButton}
+              /> */}
+
+              
+
+
+              <CustomSubmitButton 
+              type="submit" 
+              label="Sign in"
+              variant="outlined"
+              />
+              
+
             </div>
             
           </Form>
