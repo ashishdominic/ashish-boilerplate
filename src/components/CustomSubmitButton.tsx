@@ -14,9 +14,10 @@ export default CustomSubmitButton;
 
 // import React from 'react';
 // import { Button, ButtonProps } from '@mui/material';
-// import { makeStyles } from '@mui/styles';
+// import { makeStyles } from '@mui/material/styles';
 
-// const useStyles = makeStyles((theme) => ({
+
+// const useStyles = makeStyles(() => ({
 //   customButton: {
 //     backgroundColor: 'blue', // Customize the background color
 //     color: 'white', // Customize the text color
@@ -43,11 +44,11 @@ export default CustomSubmitButton;
 // import { Button, ButtonProps } from '@mui/material';
 // import { styled } from '@mui/system'; // Import styled from '@mui/system'
 
-// const CustomButton = styled(Button)(({  }) => ({
-//   backgroundColor: 'blue', // Customize the background color
-//   color: 'white', // Customize the text color
+// const CustomButton = styled(Button)(({ }) => ({
+//   backgroundColor: 'blue',
+//   color: 'white',
 //   '&:hover': {
-//     backgroundColor: 'red', // Customize the hover background color
+//     backgroundColor: 'darkblue', 
 //   },
 // }));
 
@@ -57,6 +58,95 @@ export default CustomSubmitButton;
 
 // const CustomSubmitButton: React.FC<CustomSubmitButtonProps> = ({ label, ...props }) => {
 //   return <CustomButton {...props}>{label}</CustomButton>;
+// };
+
+// export default CustomSubmitButton;
+
+
+
+
+
+
+// import React from 'react';
+// import Button, { ButtonProps } from '@mui/material/Button';
+
+
+// type CustomSubmitButtonProps = ButtonProps & {
+//   label: string; // You can customize this to add a label to your button
+// };
+
+// const CustomSubmitButton: React.FC<CustomSubmitButtonProps> = ({ label, ...props }) => {
+//   const buttonStyles = {
+//     backgroundColor: 'blue', // Customize the background color
+//     color: 'white', // Customize the text color
+//     '&:hover': {
+//       backgroundColor: 'darkblue', // Customize the hover background color
+//     },
+//   };
+
+//   return (
+//     <Button sx={buttonStyles} {...props}>
+//       {label}
+//     </Button>
+//   );
+// };
+
+// export default CustomSubmitButton;
+
+
+
+
+
+// import React from 'react';
+// import { Button, ButtonProps } from '@mui/material';
+
+// type CustomSubmitButtonProps = ButtonProps & {
+//   label: string; // You can customize this to add a label to your button
+// };
+
+// const CustomSubmitButton: React.FC<CustomSubmitButtonProps> = ({ label, ...props }) => {
+//   const buttonStyles = {
+//     backgroundColor: 'blue', 
+//     color: 'white',
+//     '&:hover': {
+//                  backgroundColor: 'red',
+//                },
+//   };
+
+//   return <Button {...props} style={buttonStyles}>{label}</Button>;
+// };
+
+// export default CustomSubmitButton;
+
+
+
+
+// import React from 'react';
+// import { Button, ButtonProps} from '@mui/material';
+// import { makeStyles } from '@material-ui/styles';
+
+// const useStyles = makeStyles({
+//   customButton: {
+//     backgroundColor: 'blue',
+//     color: 'white',
+//     '&:hover': {
+//       backgroundColor: 'red',
+//     },
+//   },
+// });
+
+// type CustomSubmitButtonProps = ButtonProps & {
+//   label: string;
+// };
+
+// const CustomSubmitButton: React.FC<CustomSubmitButtonProps> = ({ label, ...props }) => {
+//   const classes = useStyles();
+
+//   return (
+//     <Button {...props} className={classes.customButton}>
+//       {label}
+//     </Button>
+//   );
 // };
 
 // export default CustomSubmitButton;

@@ -17,9 +17,9 @@ const ChangePassword = () => {
   
   let validationSchema=Yup.object({
     currentPassword: Yup.string().required('Current Password is required'),
-    newPassword: Yup.string().required('New Password is required'),
+    newPassword: Yup.string().required('New Password is required').notOneOf([Yup.ref('currentPassword')], 'New Password must be different from Current Password'),
     confirmNewPassword: Yup.string()
-      // .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
+      .oneOf([Yup.ref('newPassword')], 'Passwords must match')
       .required('Confirm New Password is required'),
   })
   
@@ -46,7 +46,7 @@ const ChangePassword = () => {
                 <Field
                    name="currentPassword"
                    label="Current Password"
-                   type="password"
+                  //  type="password"
                    variant="outlined" 
                    fullWidth
                    as={CustomTextField}
@@ -55,7 +55,7 @@ const ChangePassword = () => {
                 <Field
                    name="newPassword"
                    label="New Password"
-                   type="password"
+                  //  type="password"
                    variant="outlined" 
                    fullWidth
                    as={CustomTextField}
@@ -64,7 +64,7 @@ const ChangePassword = () => {
                 <Field
                    name="confirmNewPassword"
                    label="Confirm New Password"
-                   type="password"
+                  //  type="password"
                    variant="outlined" 
                    fullWidth
                    as={CustomTextField}
