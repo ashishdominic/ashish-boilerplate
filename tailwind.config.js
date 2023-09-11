@@ -14,6 +14,12 @@ module.exports = {
       '5xl': '3rem',
       '6xl': '4rem',
     },
+    
+        corePlugins: {
+          preflight: false,
+        },
+       
+      
     extend: {
       colors: {
         gray: {

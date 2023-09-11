@@ -9,6 +9,7 @@ import CustomSubmitButton from '../components/CustomSubmitButton'
 
 
 
+
 let login: React.FC = () => {
 let router = useRouter();
 
@@ -91,8 +92,8 @@ let router = useRouter();
                 Sign in
               </button> */}
 
-
-              {/* <Button
+{/* 
+              <Button
                type="submit" 
                label="Sign in"
                variant="contained"
@@ -105,7 +106,7 @@ let router = useRouter();
               <CustomSubmitButton 
                 type="submit" 
                 label="Sign in"
-                // variant="outlined"
+                variant="contained"
               
               />
               
