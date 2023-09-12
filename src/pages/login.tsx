@@ -6,6 +6,7 @@ import { Formik, Field, Form} from 'formik';
 import * as Yup from 'yup';
 import CustomTextField from '../components/CustomTextField';
 import CustomSubmitButton from '../components/CustomSubmitButton'
+import DarkModeToggle from '../components/DarkModeToggle';
 
 
 
@@ -53,7 +54,7 @@ let router = useRouter();
             validationSchema={validationSchema}
             onSubmit={onSubmit}
           >
-          <Form className="rounded bg-white p-6 shadow-md space-y-6" action="#" method="POST">
+          <Form className="rounded p-6 shadow-md space-y-6" action="#" method="POST">
             
                 <Field
                   name="email"
@@ -82,27 +83,7 @@ let router = useRouter();
               </div>
               
             <div>
-              {/* <button
-                type="submit"
-                 label="Submit Form"
-                 variant="contained"
-                //className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                component={CustomSubmitButton}
-              >
-                Sign in
-              </button> */}
-
-{/* 
-              <Button
-               type="submit" 
-               label="Sign in"
-               variant="contained"
-               as={CustomSubmitButton}
-              /> */}
-
-              
-
-
+             
               <CustomSubmitButton 
                 type="submit" 
                 label="Sign in"
@@ -129,7 +110,11 @@ let router = useRouter();
                 Register
              
           </Link>
+          
           </div>
+          </div>
+          <div>
+          <DarkModeToggle />
           </div>
           
         </div>
