@@ -2,11 +2,15 @@ import '@/styles/global.css';
 import React from 'react';
 import { CustomThemeProvider } from '../components/Theme';
 import type { AppProps } from 'next/app';
+import { ApolloProvider } from '@apollo/client';
+import client from '@/utils/apollo-client';
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
-  <CustomThemeProvider>
+  <ApolloProvider client={client}>
+  {/* <CustomThemeProvider> */}
     <Component {...pageProps} />
-  </CustomThemeProvider>
+  {/* </CustomThemeProvider> */}
+  </ApolloProvider>
 );
 
 export default MyApp;

@@ -96,6 +96,12 @@ const Main = (props: IMainProps) => (
                   Sign up
                 </Link>
               </li>
+              <Link href="/user-dashboard/">
+                dash
+              </Link>
+              <Link href="/ngologin/">
+                NGOLogin
+              </Link>
             </ul>
           </nav>
         </div>

@@ -1,4 +1,6 @@
+import ReduxProvider from '@/redux/provider';
 import '@/styles/global.css';
+import Red from '@mui/material/colors/red';
 
 import type { Metadata } from 'next';
 
@@ -36,7 +38,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body><ReduxProvider>{children}</ReduxProvider></body>
     </html>
   );
 }

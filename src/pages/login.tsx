@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter} from 'next/router';
 import { Formik, Field, Form} from 'formik';
@@ -7,17 +7,92 @@ import * as Yup from 'yup';
 import CustomTextField from '../components/CustomTextField';
 import CustomSubmitButton from '../components/CustomSubmitButton'
 import DarkModeToggle from '../components/DarkModeToggle';
+import CustomPopup from '../components/CustomPopup';
+import client from '@/utils/apollo-client';
+import { ApolloError, gql, useMutation, useQuery } from '@apollo/client';
+//import { LOGIN_USER } from '@/utils/gqlquery';
 
 
 
 
 let login: React.FC = () => {
+  const LOGIN_USER = gql`
+
+  query userLogin($payload:LoginUserDto!) {
+
+    userLogin(payload: $payload) {
+
+      accessToken
+
+      refreshToken
+
+    }
+
+  }
+`;
+
 let router = useRouter();
 
   let initialValues = {
     email: '',
     password: '',
   };
+  // const { loading, error} = useQuery(LOGIN_USER, { client });
+  // const onSubmit = async (values: { email: string; password: string }) => {
+  //   console.log('Button clicked');
+  //   console.log('Form Values:', values);
+
+  //   if (loading) {
+  //     // Handle loading state
+  //   } else if (error) {
+  //     console.error('Authentication failed:', error.message);
+  //   } else {
+  //     try {
+  //       //const { data: loginData } = userLogin({
+  //         variables: {
+  //           input: {
+  //             email: values.email,
+  //             password: values.password,
+  //           },
+  //         },
+  //      // });
+
+  //       const { accessToken, refreshToken } = loginData.userLogin;
+
+  //       localStorage.setItem('accessToken', accessToken);
+  //       localStorage.setItem('refreshToken', refreshToken);
+
+  //       router.push('/');
+
+  //       console.log('Login success');
+  //     } 
+  //     catch (error) {
+  //       const apolloError = error as ApolloError;
+  //       console.error('Login failed:', apolloError.message);
+  //     }
+  //   }
+  // };
+
+  const [userLogin] = useQuery(LOGIN_USER);  
+   const onSubmit = async (values: { email: string; password: string }) => { 
+        try {       
+          const { data } = await userLogin({         
+          variables: { 
+           payload: {   
+           email: values.email,  
+           password: values.password,  
+          },  
+        },
+      }); 
+           const { accessToken, refreshToken } = data.userLogin;       
+           localStorage.setItem('accessToken', accessToken);      
+           localStorage.setItem('refreshToken', refreshToken);       
+           router.push('/');     
+          } catch (error) {       
+          console.error('Authentication error:', error);    
+         }   
+        };
+
   
   let validationSchema=Yup.object({
     email: Yup.string().email('Invalid email address').required('Email is required'),
@@ -29,10 +104,23 @@ let router = useRouter();
     }),
   })
   
-  let onSubmit=(values: { email: string; password: string})=>{
-   console.log('form data',values)
-   router.push('/');
-  }
+  // let onSubmit=(values: { email: string; password: string})=>{
+  //  console.log('form data',values)
+  //  router.push('/');
+  // }
+
+  const [isPopupOpen, setPopupOpen] = useState(false);
+
+
+    // Function to open the popup
+    const openPopup = () => {
+      setPopupOpen(true);
+    };
+  
+    // Function to close the popup
+    const closePopup = () => {
+      setPopupOpen(false);
+    };
 
   return (
     <div>
@@ -87,11 +175,9 @@ let router = useRouter();
               <CustomSubmitButton 
                 type="submit" 
                 label="Sign in"
-                variant="contained"
-              
+                variant="contained"             
               />
               
-
             </div>
             
           </Form>
@@ -116,6 +202,24 @@ let router = useRouter();
           <div>
           <DarkModeToggle />
           </div>
+
+           {/* Button to open the popup */}
+      <button onClick={openPopup}>Open Popup</button>
+
+{/* Render the CustomPopup component */}
+<CustomPopup
+  open={isPopupOpen}
+  onClose={closePopup}
+  title="Do you want to delete"
+  onPrimaryButtonClick={() => {
+    // Handle primary button click
+    closePopup(); // Close the popup if needed
+  }}
+  onSecondaryButtonClick={() => {
+    // Handle secondary button click
+    closePopup(); // Close the popup if needed
+  }}
+/>
           
         </div>
       </div>
@@ -124,3 +228,4 @@ let router = useRouter();
 }
 
 export default login
+

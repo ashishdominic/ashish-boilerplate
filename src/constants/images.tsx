@@ -1,0 +1,37 @@
+const images = {
+  logo: '/assets/images/landing-page/logo.svg',
+  logoutIcon:'/assets/images/landing-page/logoutIcon.svg',
+  heroBackground:'/assets/images/landing-page/wave.png',
+  heroImage:'/assets/images/landing-page/hero_image.png',
+  commitmentIcon:'/assets/images/landing-page/commitment_icon.svg',
+  excellenceIcon:'/assets/images/landing-page/excellence_icon.svg',
+  integrityIcon:'/assets/images/landing-page/integrity_icon.svg',
+  respectIcon:'/assets/images/landing-page/respect_icon.svg',
+  happyNurseandManWheelchair:'/assets/images/landing-page/happy-nurse-man-wheelchair.png',
+  ladiesDonating:'/assets/images/landing-page/ladies_donating.png',
+  ladyandLadyWheelchair:'/assets/images/landing-page/lady_lady_wheelchair.png',
+  manDrinkCoffee:'/assets/images/landing-page/man-drink-coffee.png',
+  prayingMan:'/assets/images/landing-page/man-praying.png',
+  nurseCheckingMan:'/assets/images/landing-page/nurse-checking-man.png',
+  nurseSittingWithOldManWoman:'/assets/images/landing-page/nurse-old-man-woman-sofa.png',
+  oldageHome:'/assets/images/landing-page/oldagehome.png',
+  oldManWithCaretaker:'/assets/images/landing-page/oldman_caretaker.png',
+  patientWithDoctor:'/assets/images/landing-page/patient-with-kind-doctor.png',
+  socialworkers:'/assets/images/landing-page/socialworkers-helping-disabled-man.png',
+  womanCaregiver:'/assets/images/landing-page/woman_caregiver_outdoor.png',
+  doctorCaringWoman:'/assets/images/landing-page/doctor-taking-care-senior-woman.png',
+  seniorWomanSittingBedroom:'/assets/images/landing-page/senior-woman-sitting-bedroom.png',
+  joyfulOldLady:'/assets/images/landing-page/joyful-old-lady-sitting-couch.png',
+  ladyDoctor1:'/assets/images/landing-page/lady_doctor_1.png',
+  ladyDoctor2:'/assets/images/landing-page/lady_doctor_2.png',
+  maleDoctor1:'/assets/images/landing-page/male_doctor_1.png',
+  holdingHands:'/assets/images/landing-page/holding_hands.png',
+  staffs1:'/assets/images/landing-page/staffs1.png',
+  staffs2:'/assets/images/landing-page/staffs2.png',
+  ladyDoctorRaindrop:'/assets/images/landing-page/lady_doctor_raindrop.png',
+  manLogin:'/assets/images/landing-page/man_login.svg',
+  searchicon:'/assets/images/landing-page/searchicon.svg'
+  // Add more image constants as needed
+};
+
+export default images;
